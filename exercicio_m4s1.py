@@ -1,15 +1,10 @@
-import requests
-
 def get_modelos_veiculos(id_marca):
     url = "https://parallelum.com.br/fipe/api/v1/carros/marcas/22/modelos"
     headers = {'user-agent':'MyStudyApp'}
     resposta = requests.get(url,headers=headers)
-    get_modelos_veiculos(id_marca)
-
-    
 
     if resposta.status_code != 200:
-        print('Ouve um erro na requisição!!')
+        print('Houve um erro na requisição!!')
 
     resposta_json = resposta.json()
     return resposta_json['modelos']
@@ -21,7 +16,7 @@ class ListaFipe():
         self.modelos = []
 
     def __iter__(self):
-        self.indice >= get_modelos_veiculos(self.id_marca)
+        self.modelos = get_modelos_veiculos(self.id_marca)
         return self
 
     def __next__(self):
@@ -38,7 +33,6 @@ for veiculo in lista_fipe:
     print(f'nome:{veiculo["nome"]}')
     print(f'ID: {veiculo["codigo"]}')
     print("-"*50)
-
 
 
 
